@@ -4,8 +4,10 @@ struct ValuesStruct {
 }
 
 impl ValuesStruct {
-    fn new(data: [i32; 6]) -> ValuesStruct {
-        ValuesStruct { data }
+    fn new(a: i32, b: i32, c: i32, d: i32, e: i32, f: i32) -> ValuesStruct {
+        ValuesStruct {
+            data: [a, b, c, d, e, f],
+        }
     }
 
     fn search_for_index(&self, index: usize) -> &i32 {
@@ -24,7 +26,7 @@ impl ValuesStruct {
         if index > self.data.len() {
             panic!(
                 "Максимальный индекс: {}, ваш индекс: {}",
-                self.data.len() - 1,
+                self.data.len(),
                 index
             )
         } else {
@@ -36,7 +38,7 @@ impl ValuesStruct {
         if right_index > self.data.len() {
             panic!(
                 "Максимальный индекс: {}, ваш индекс: {}",
-                self.data.len() - 1,
+                self.data.len(),
                 right_index
             );
         } else if left_index > right_index {
@@ -52,8 +54,7 @@ impl ValuesStruct {
 }
 
 fn main() {
-    let numbers = [1, 2, 3, 4, 5, 6];
-    let data1 = ValuesStruct::new(numbers);
+    let data1 = ValuesStruct::new(1, 2, 3, 4, 5, 6);
     println!("1. {:?},", data1);
     println!("2. {:?}", data1.search_for_index(5));
     println!("3. {:?}", data1.slice(6));
