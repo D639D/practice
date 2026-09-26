@@ -96,6 +96,35 @@ impl ValuesStruct {
     }
 }
 
+fn slice(raw: &[i32]) -> &i32{
+    let mut tmp_index: usize = 0;
+    let mut tmp = raw[0];
+    for i in 0..raw.len() {
+        if raw[i] > tmp as i32 {
+            tmp = raw[i];
+            tmp_index = i;
+        }
+    } &raw[tmp_index]
+}
+
+fn even(raw: &mut [i32]) -> &[i32] {
+    for i in 0..raw.len() {
+        if raw[i] % 2 == 0{
+            raw[i] = 0;
+        }
+    } raw
+}
+
+fn equality(one: &[i32], two: &[i32]) -> bool {
+    for x in 0..one.len() {
+        for _y in 0..two.len() {
+            if one[x] != two[x] {
+                return false;
+            }
+        }
+    } true
+}
+
 fn main() {
     let mut data1 = ValuesStruct::new(1, 2, 3, 4, 5, 6);
     println!("1. {:?},", data1);
@@ -107,4 +136,7 @@ fn main() {
     println!("7. {:?}", data1.reverse());
     println!("8. {:?}", data1.shift(2));
     println!("9. {:?}", data1.change(22));
+    println!("10. {:?}", slice(&[1, 3, 2, 2, 10, 13, 1, 31, 2, 1000, 123]));
+    println!("11. {:?}", even(&mut [2, 3, 4, 5, 6, 8, 10]));
+    println!("12. {:?}", equality(&[1, 2, 3, 2, 3], &[1, 2, 3, 2, 4]));
 }
