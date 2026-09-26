@@ -25,7 +25,7 @@ impl ValuesStruct {
     fn slice(&self, index: usize) -> &[i32] {
         if index > self.data.len() {
             panic!(
-                "Максимальный индекс: {}, ваш индекс: {}",
+                "Максимальная длина: {}, ваш индекс: {}",
                 self.data.len(),
                 index
             )
@@ -37,15 +37,22 @@ impl ValuesStruct {
     fn trim(&self, left_index: usize, right_index: usize) -> &[i32] {
         if right_index > self.data.len() {
             panic!(
-                "Максимальный индекс: {}, ваш индекс: {}",
+                "Максимальная длина: {}, ваш индекс: {}",
                 self.data.len(),
                 right_index
             );
         } else if left_index > right_index {
+            if left_index > self.data.len() || right_index > self.data.len() {
+                panic!(
+                    "Первый индекс не может быть больше второго. Ваш первый индекс: {}, ваш второй индекс: {}.\nИндекс зашёл за границу дозволенного, максимальная длина: {}",
+                    left_index,
+                    right_index,
+                    self.data.len()
+                );
+            }
             panic!(
                 "Первый индекс не может быть больше второго. Ваш первый индекс: {}, ваш второй индекс: {}",
-                left_index,
-                right_index
+                left_index, right_index
             );
         } else {
             &self.data[left_index..right_index]
@@ -58,5 +65,5 @@ fn main() {
     println!("1. {:?},", data1);
     println!("2. {:?}", data1.search_for_index(5));
     println!("3. {:?}", data1.slice(6));
-    println!("4. {:?}", data1.trim(1, 6));
+    println!("4. {:?}", data1.trim(111, 1));
 }
